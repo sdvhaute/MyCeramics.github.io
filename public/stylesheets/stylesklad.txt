@@ -1,0 +1,21 @@
+
+    /* --color1: #a6808c;
+    --color2: #b36a5e;
+    --color2b: #b3695e45;
+    --color3: #eeddd3;
+    --color4: #461220;
+    --color5: #672436;
+
+    --colortext: #461220;
+    --colorbg: #a6808c;
+
+    --colorFFF: #fff; 
+
+    --color1: #9eae70;
+    --color2: #5A6D38;
+    --color2b: #596d382e;
+    --color3: #DCD6D2;
+    --color4: #1a4301;
+
+    --colortext: #1a4301;
+    --colorbg: #9eae70; 

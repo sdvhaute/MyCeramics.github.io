@@ -1,0 +1,57 @@
+<% layout('boilerplate') -%>
+
+
+    <div class="container-fluid container-login">
+
+        <div class="row-item row justify-content-center m-3">
+            <div class="col-item col-lg-6 col-12 p-lg-5 p-3 box-shadow">
+
+                <form action="/api/v1/login" method="POST" class="validate-form" novalidate>
+
+                    <H1 class="text-center">Welcome back!</H1>
+
+                    <div class="row">
+                        <div class="col p-3 pb-0">
+
+                            <!-- Email input -->
+                            <div class="form-outline mb-4">
+                                <!-- <label class="form-label" for="email">Email address</label> -->
+                                <input type="email" id="email" class="form-control" name="email"
+                                    placeholder="Enter Email" required />
+                            </div>
+                            <!-- Password input -->
+                            <div class="form-outline mb-4">
+                                <!-- <label class="form-label" for="password">Password</label> -->
+                                <input type="password" id="password" class="form-control" name="password"
+                                    placeholder="Enter Password" required />
+                            </div>
+
+
+                            <!-- Submit button -->
+                            <button type="submit" class="btn  btn-block mb-4">Login</button>
+
+
+                            <div class="row">
+                                <div class="col">
+                                    <div class="">
+                                        <p>Not a member yet? <a href="/api/v1/register">Register</a>.</p>
+                                    </div>
+
+                                </div>
+                                <!-- <div class="col-6">
+                                    <div class="row">
+                                        <div class="col d-flex justify-content-end">
+                                            <div class="form-check">
+                                                <label class="form-check-label" for="remember"> Remember me </label>
+                                                <input class="form-check-input" type="checkbox" value="" id="remember"
+                                                    checked />
+                                            </div>
+                                        </div>
+
+                                    </div> -->
+                                </div>
+                            </div>
+                </form>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,277 @@
+<% layout('boilerplate') -%>
+
+    <div class="container-fluid p-4 d-flex flex-row ">
+
+        <div class="container">
+            <div class="row d-flex flex-row justify-content-center">
+
+                <div class="container-show-item col-lg-5 p-lg-4 p-2 me-lg-3 me-0 mb-lg-0 mb-1 box-shadow">
+
+                    <form action="/api/v1/projects/<%=projectObject[0].id%>/delete?_method=DELETE" method="POST">
+                        <button class="btn delete-project mx-1"><i class="fa-regular fa-trash-can"></i></button>
+                    </form>
+                    <button class="btn edit-project mx-1"
+                        onclick="window.location.href='/api/v1/projects/<%=projectObject[0].id%>/edit';">
+                        <i class="fa-regular fa-pen-to-square"></i>
+                    </button>
+
+
+                    <div class="row d-flex flex-row justify-content-center">
+
+                        <div class="col-12 px-4 pb-3">
+                            <div class="project-title h1">
+                                <%= projectObject[0].projectname %>
+                            </div>
+                            <div class="project-desc h5">
+                                <%= projectObject[0].projectdesc %>
+                            </div>
+                            <div class="row py-1 show-params">
+                                <div class="col-6 col-params-left">Form: </div>
+                                <div class="col-6  col-params-right">
+                                    <%= projectObject[0].formclay%>
+                                </div>
+                            </div>
+                            <div class="row py-1 show-params">
+                                <div class="col-6 col-params-left">Clay: </div>
+                                <div class="col-6 col-params-right">
+                                    <%= projectObject[0].claytype %>
+                                </div>
+                            </div>
+                            <div class="row py-1 show-params">
+                                <div class="col-6 col-params-left">Glaze: </div>
+                                <div class="col-6 col-params-right">
+                                    <%= projectObject[0].glazetype %>
+                                </div>
+                            </div>
+                            <div class="row py-1 show-params">
+                                <div class="col-6 col-params-left">Weight pp: </div>
+                                <div class="col-6 col-params-right">
+                                    <%= projectObject[0].startweightclay %>kg
+                                </div>
+                            </div>
+                            <div class="row py-1 show-params">
+                                <div class="col-6 col-params-left">Dimensions: </div>
+                                <div class="col-6 col-params-right">
+                                    <%= projectObject[0].dimensionsheight%>cm x <%= projectObject[0].dimensionslength%>cm x <%= projectObject[0].dimensionswidth%>cm
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                        <div class="col-12">
+                            <div class="img-show" style="background-image:url(<%=projectObject[0].imgurl%>)"></div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+                <div class="col-lg-5 p-0 m-0 d-flex flex-column ">
+
+
+                    <div
+                        class="container-show-item progress-container flex-grow-1 p-3 ms-lg-3 ms-0 mt-lg-0 mt-3 mb-lg-3 d-flex flex-column box-shadow">
+
+                        <div class="row stage flex-grow-1 ">
+                            <div class="col-11">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <div class="circle">1</div>
+                                    </div>
+                                    <div class="col-6">
+                                        <h4 class="d-inline">New Project</h4>
+                                    </div>
+                                    <div class="col-4">
+                                        <%=projectObject[0].startdate %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-1">
+
+                            </div>
+                        </div>
+
+                        <div class="row stage flex-grow-1 ">
+                            <div class="col-11 <%= projectObject[0].thrown ? "" : " unfinished" %> ">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <div class="circle">2</div>
+                                    </div>
+                                    <div class="col-6">
+                                        <h4 class="d-inline">Thrown</h4>
+                                    </div>
+                                    <div class="col-4">
+                                        <%=projectObject[0].throwndate %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-1">
+                                <form action="/api/v1/projects/<%=projectObject[0].id %>/checkThrown?_method=PUT"
+                                    method="POST">
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="thrown" name="thrown"
+                                            <%=projectObject[0].thrown==true ? "checked" : "unchecked" %>
+                                        onchange="this.form.submit()">
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="row stage flex-grow-1 ">
+                            <div class="col-11 <%= projectObject[0].trimmed ? "" : " unfinished" %>">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <div class="circle">3</div>
+                                    </div>
+                                    <div class="col-6">
+                                        <h4 class="d-inline">Trimmed</h4>
+                                    </div>
+                                    <div class="col-4">
+                                        <%=projectObject[0].trimmeddate %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-1">
+                                <form action="/api/v1/projects/<%=projectObject[0].id %>/checkTrimmed?_method=PUT"
+                                    method="POST">
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="trimmed" name="trimmed"
+                                            <%=projectObject[0].trimmed==true ? "checked" : "unchecked" %>
+                                        onchange="this.form.submit()">
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="row stage flex-grow-1 ">
+                            <div class="col-11 <%= projectObject[0].bisque ? "" : " unfinished" %>">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <div class="circle">4</div>
+                                    </div>
+                                    <div class="col-6">
+                                        <h4 class="d-inline">Biscuit</h4>
+                                    </div>
+                                    <div class="col-4">
+                                        <%=projectObject[0].bisquedate %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-1">
+                                <form action="/api/v1/projects/<%=projectObject[0].id %>/checkBisque?_method=PUT"
+                                    method="POST">
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="bisque" name="bisque"
+                                            <%=projectObject[0].bisque==true ? "checked" : "unchecked" %>
+                                        onchange="this.form.submit()">
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="row stage flex-grow-1 ">
+                            <div class="col-11 <%= projectObject[0].glazed ? "" : " unfinished" %>">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <div class="circle">5</div>
+                                    </div>
+                                    <div class="col-6">
+                                        <h4 class="d-inline">Glazed</h4>
+                                    </div>
+                                    <div class="col-4">
+                                        <%=projectObject[0].glazeddate %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-1">
+                                <form action="/api/v1/projects/<%=projectObject[0].id %>/checkGlazed?_method=PUT"
+                                    method="POST">
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="glazed" name="glazed"
+                                            <%=projectObject[0].glazed==true ? "checked" : "unchecked" %>
+                                        onchange="this.form.submit()">
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="row stage flex-grow-1 ">
+                            <div class="col-11 <%= projectObject[0].glazefired ? "" : " unfinished" %>">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <div class="circle">6</div>
+                                    </div>
+                                    <div class="col-6">
+                                        <h4 class="d-inline">Finished</h4>
+                                    </div>
+                                    <div class="col-4">
+                                        <%=projectObject[0].glazefireddate %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-1">
+                                <form action="/api/v1/projects/<%=projectObject[0].id %>/checkGlazeFired?_method=PUT"
+                                    method="POST">
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="glazefired"
+                                            name="glazefired" <%=projectObject[0].glazefired==true ? "checked"
+                                            : "unchecked" %>
+                                        onchange="this.form.submit()">
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="container-show-item notes-container p-4 ms-lg-3 ms-0 mt-3 box-shadow">
+
+                        <div class="row">
+
+                            <form id="form-notes-update" action="/api/v1/projects/<%=projectObject[0].id %>/updateNotes?_method=PUT"
+                                method="POST">
+                                <div class="col-12 mb-3">
+                                    <div class="row">
+                                        <div class="col-11 col-params-left">Notes:</div>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+
+                                    <textarea type="text" id="notes" class="form-control" name="notes" rows="5"
+                                        onchange="this.form.submit()"> <%= projectObject[0].notes %></textarea>
+
+                                </div>
+                            </form>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+        <script>
+
+            
+
+
+        </script>

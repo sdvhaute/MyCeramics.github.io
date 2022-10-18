@@ -1,0 +1,374 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* CSS Variables */
+:root {
+    --color1: #457b9d;
+    --color2: #b36a5e;
+    --color3: #457b9d72;
+    --color4: #00344E;
+
+    --colordark: #00344E;
+    --colorlight: #faf7f0;
+
+    --colorFFF: #fff;
+
+
+    --montserrat: 'Montserrat', sans-serif;
+    --montserratbold: 'Montserrat', bold;
+    --montserratsubrayada: 'Montserrat Subrayada', sans-serif;
+
+}
+
+/*==================== BASE ====================*/
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    min-height: 100vh;
+}
+
+body {
+    font-family: var(--body-font);
+    background-color: var(--colorlight);
+    color: var(--colordark);
+    font-family: var(--montserrat);
+    position: relative;
+
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+    color: var(--colordark);
+}
+
+nav {
+    font-weight: 500;
+    background-color: var(--colordark);
+    color: var(--colorlight);
+}
+
+main {
+    margin-bottom: 5vh;
+}
+
+footer {
+    color: var(--colordark);
+    background-color: var(--colorlight);
+    position: absolute;
+    bottom: -100px;
+    width: 100%;
+}
+
+.box-shadow {
+    
+    box-shadow: 0 3px 6px rgb(0 0 0 / 25%);
+}
+
+.btn {
+    background-color: var(--colordark);
+    color: var(--colorFFF);
+}
+.btn-nav {
+    background-color: var(--colorlight);
+    color: var(--colordark);
+    font-weight: 600;
+}
+
+.btn:hover {
+    transform: scale(0.95);
+    color: var(--colorlight);
+}
+.btn-nav:hover {
+    transform: scale(0.95);
+    color: var(--colordark);
+}
+
+/* Home page */
+.container-home {
+    width: inherit;
+    height: 100vh;
+    /* background-color: var(--color3); */
+    /* background-image: url("https://images.unsplash.com/photo-1556872801-14f7230b307f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"); */
+    background-image: url("https://images.unsplash.com/photo-1493106641515-6b5631de4bb9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1269&q=80");
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: cover;
+
+    color: white;
+
+    position: relative;
+}
+
+
+/* index page */
+
+.container-intro {
+    width: inherit;
+    height: 50vh;
+    /* background-color: var(--color3); */
+    /* background-image: url("https://images.unsplash.com/photo-1556872801-14f7230b307f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"); */
+    background-image: url("https://images.unsplash.com/photo-1493106641515-6b5631de4bb9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1269&q=80");
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: cover;
+
+    color: white;
+
+    position: relative;
+}
+
+.container-index {
+    width: auto;
+    position: relative;
+    border: 0;
+}
+
+.section-label {
+    color: var(--colordark);
+    background-color: var(--colorFFF);
+    width: fit-content;
+    text-transform: uppercase;
+    font-size: 1.3rem;
+}
+
+.section-content {
+    background-color: var(--color3);
+}
+
+.card {
+    cursor: pointer;
+    border: none;
+}
+
+.card-top {
+    height: 200px;
+    width: 200px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+
+.fill {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden
+}
+
+.fill img {
+    flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%;
+    border: inherit;
+}
+
+#divs {
+    cursor: pointer;
+}
+
+
+#new-project-button {
+    position: absolute;
+    bottom: 30px;
+    left: 100px;
+}
+
+#filterparams {
+    display: block;
+    /* width: 100%; */
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.form-string:disabled,
+.form-string[readonly],
+.form-string::placeholder {
+    background-color: #FFF;
+    color: #000;
+    opacity: 1;
+}
+
+.fa-circle-xmark {
+    color: rgb(182, 23, 23);
+}
+
+/* Search  */
+.div-searched-string {
+    position: relative;
+}
+
+.div-searched-string a {
+    position: absolute;
+    transform: translate(0, -50%);
+    top: 50%;
+    right: 10px;
+}
+
+.div-searched-string a i {
+    transform: scale(1.5rem);
+}
+
+
+/* kanban page */
+
+.kanban {
+    background-color: var(--color3);
+    margin: 0.5rem;
+    padding: 0.5rem;
+}
+
+#divs-kanban {
+    cursor: move;
+}
+
+.dragging {
+    opacity: '0.4';
+}
+
+
+/* show page */
+
+.container-show-item {
+    background-color: var(--color3);
+    position: relative;
+}
+
+.notes-container,
+.progress-container {
+    width: 100%;
+
+}
+
+.stage {
+    min-height: 40px;
+}
+
+.delete-project {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+.edit-project {
+    width: auto;
+    position: absolute;
+    top: 1rem;
+    right: 4rem;
+}
+
+.img-show {
+    width: 100%;
+    height: 100%;
+    min-height: 300px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.project-desc {
+    font-style: italic;
+    font-weight: 200;
+}
+
+.col-params-left {
+    text-transform: uppercase;
+}
+
+.col-params-right {
+    text-align: end;
+    height: fit-content;
+}
+
+.proj-params {
+    background-color: var(--color3);
+}
+
+.form-check-input::after {
+    background-color: var(--color4);
+}
+
+.nod {
+    display: none !important;
+}
+
+
+/* my progress css */
+.circle {
+    background-color: var(--colordark);
+    color: var(--colorFFF);
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid var(--line-border-empty);
+    transition: 0.4s ease;
+}
+
+.unfinished {
+    opacity: 0.4;
+}
+
+/* login & register page */
+
+.container-login .row-item .col-item {
+    background-color: var(--color3);
+
+}
+
+.container-register .row-item .col-item {
+    background-color: var(--color3);
+
+}
+
+/* new project page */
+
+.container-newproject .row-item .col-item {
+    background-color: var(--color3);
+
+}
+
+
+.img-field {
+    background-color: var(--color3);
+    min-height: 250px;
+    min-width: 250px;
+
+    cursor: pointer;
+}
+
+.img-field i:hover {
+    transform: scale(1.05);
+}
+
+
+
+/* new project sections */
+
+.section-nod {
+    display: none;
+}
+

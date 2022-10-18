@@ -1,0 +1,200 @@
+<% layout('boilerplate') %>
+
+
+    <div class="container-fluid container-intro p-0 d-flex justify-content-center align-items-center">
+        <% if(currentUser) {%>
+            <h1>
+                Hello <%= currentUser.firstname %>!!
+            </h1>
+            <% } %>
+                <button id="new-project-button" type="button" class="btn btn-dark "
+                    onclick="window.location.href='/api/v1/projects/new';">Create New Project</button>
+
+    </div>
+
+    <div class="container-fluid container-filter d-flex justify-content-center py-4">
+        <select class="mx-2" name="filterparams" id="filterparams">
+            <option value="">--All--</option>
+            <option value="new">New</option>
+            <option value="thrown">Thrown</option>
+            <option value="trimmed">Trimmed</option>
+            <option value="bisque">Bisque</option>
+            <option value="glazed">Glazed</option>
+            <option value="glazefired">Finished</option>
+        </select>
+
+
+        <% if (typeof stringSearch !="undefined" ){ %>
+            <div class="div-searched-string">
+                <input class="form-string form-control me-2" type="text" name="stringSearch" aria-label="Search"
+                    placeholder="<%=stringSearch%>" disabled>
+                <a href="/api/v1/projects"><i class="fa-regular fa-circle-xmark"></i></a>
+            </div>
+            <% } else { %>
+                <form action="/api/v1/projects/search" method="POST" class="d-flex search-form">
+                    <input class="form-control me-2" type="text" name="stringSearch" aria-label="Search"
+                        placeholder="Search" >
+                    <button class="btn" type="submit">Search</button>
+                </form>
+
+                <%}%>
+
+
+
+    </div>
+
+    <div class="container-catalogue p-lg-4 p-2">
+
+        <div id="section-new" class="section-cards container d-flex flex-column py-3">
+
+            <div class="row section-label p-2 rounded-top">New Projects</div>
+            <div class="row section-content p-3 d-flex justify-content-md-start justify-content-center ">
+
+                <% for (let project of projectObject){ if (project.thrown===false && project.trimmed===false &&
+                    project.bisque===false && project.glazed===false && project.glazefired===false) {%>
+
+
+                    <div class="card p-0 m-2" style="width: fit-content;" data-thrown="<%=project.thrown%>"
+                        data-trimmed="<%=project.trimmed%>" data-bisque="<%=project.bisque%>"
+                        data-glazed="<%=project.glazed%>" data-glazefired="<%=project.glazefired%>"
+                        onclick="window.location.href='/api/v1/projects/<%= project.id %>';">
+
+                        <div class="card-top" style="background-image: url(<%=project.imgurl%>);">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <%= project.projectname %>
+                            </h5>
+                        </div>
+                    </div>
+                    <% } } %>
+            </div>
+        </div>
+
+        <div id="section-thrown" class="section-cards container d-flex flex-column py-3">
+
+            <div class="row section-label p-2 rounded-top">Thrown</div>
+            <div class="row section-content p-3 d-flex justify-content-md-start justify-content-center">
+
+                <% for (let project of projectObject){ if (project.thrown===true && project.trimmed===false &&
+                    project.bisque===false && project.glazed===false && project.glazefired===false) {%>
+
+                    <div class="card p-0 m-2" style="width: fit-content;" data-thrown="<%=project.thrown%>"
+                        data-trimmed="<%=project.trimmed%>" data-bisque="<%=project.bisque%>"
+                        data-glazed="<%=project.glazed%>" data-glazefired="<%=project.glazefired%>"
+                        onclick="window.location.href='/api/v1/projects/<%= project.id %>';">
+
+                        <div class="card-top" style="background-image: url(<%=project.imgurl%>);">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <%= project.projectname %>
+                            </h5>
+                        </div>
+                    </div>
+                    <% } } %>
+            </div>
+        </div>
+
+        <div id="section-trimmed" class="section-cards container d-flex flex-column py-3">
+
+            <div class="row section-label p-2 rounded-top">Trimmed</div>
+            <div class="row section-content p-3 d-flex justify-content-md-start justify-content-center">
+
+                <% for (let project of projectObject){if ( project.trimmed===true && project.bisque===false &&
+                    project.glazed===false && project.glazefired===false) {%>
+
+                    <div class="card p-0 m-2" style="width: fit-content;" data-thrown="<%=project.thrown%>"
+                        data-trimmed="<%=project.trimmed%>" data-bisque="<%=project.bisque%>"
+                        data-glazed="<%=project.glazed%>" data-glazefired="<%=project.glazefired%>"
+                        onclick="window.location.href='/api/v1/projects/<%= project.id %>';">
+
+                        <div class="card-top" style="background-image: url(<%=project.imgurl%>);">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <%= project.projectname %>
+                            </h5>
+                        </div>
+                    </div>
+                    <% } } %>
+            </div>
+        </div>
+
+        <div id="section-bisque" class="section-cards container d-flex flex-column py-3">
+
+            <div class="row section-label p-2 rounded-top">Biscuit</div>
+            <div class="row section-content p-3 d-flex justify-content-md-start justify-content-center">
+
+                <% for (let project of projectObject){ if (project.bisque===true && project.glazed===false &&
+                    project.glazefired===false) {%>
+
+                    <div class="card p-0 m-2" style="width: fit-content;" data-thrown="<%=project.thrown%>"
+                        data-trimmed="<%=project.trimmed%>" data-bisque="<%=project.bisque%>"
+                        data-glazed="<%=project.glazed%>" data-glazefired="<%=project.glazefired%>"
+                        onclick="window.location.href='/api/v1/projects/<%= project.id %>';">
+
+                        <div class="card-top" style="background-image: url(<%=project.imgurl%>);">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <%= project.projectname %>
+                            </h5>
+                        </div>
+                    </div>
+                    <% } } %>
+            </div>
+        </div>
+
+        <div id="section-glazed" class="section-cards container d-flex flex-column py-3">
+
+            <div class="row section-label p-2 rounded-top">Glazed</div>
+            <div class="row section-content p-3 d-flex justify-content-md-start justify-content-center">
+
+                <% for (let project of projectObject){if (project.glazed===true && project.glazefired===false) {%>
+
+                    <div class="card p-0 m-2" style="width: fit-content;" data-thrown="<%=project.thrown%>"
+                        data-trimmed="<%=project.trimmed%>" data-bisque="<%=project.bisque%>"
+                        data-glazed="<%=project.glazed%>" data-glazefired="<%=project.glazefired%>"
+                        onclick="window.location.href='/api/v1/projects/<%= project.id %>';">
+
+                        <div class="card-top" style="background-image: url(<%=project.imgurl%>);">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <%= project.projectname %>
+                            </h5>
+                        </div>
+                    </div>
+                    <% } } %>
+            </div>
+        </div>
+
+        <div id="section-glazefired" class="section-cards container d-flex flex-column py-3">
+
+            <div class="row section-label p-2 rounded-top">Finished</div>
+            <div class="row section-content p-3 d-flex justify-content-md-start justify-content-center">
+
+                <% for (let project of projectObject){ if (project.glazefired===true) {%>
+
+                    <div class="card p-0 m-2" style="width: fit-content;" data-thrown="<%=project.thrown%>"
+                        data-trimmed="<%=project.trimmed%>" data-bisque="<%=project.bisque%>"
+                        data-glazed="<%=project.glazed%>" data-glazefired="<%=project.glazefired%>"
+                        onclick="window.location.href='/api/v1/projects/<%= project.id %>';">
+
+                        <div class="card-top" style="background-image: url(<%=project.imgurl%>);">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <%= project.projectname %>
+                            </h5>
+                        </div>
+                    </div>
+                    <% } } %>
+            </div>
+        </div>
+    </div>
+
+    
+    <script src='/scripts/indexscript.js'></script>
+    

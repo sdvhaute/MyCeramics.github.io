@@ -1,0 +1,124 @@
+<% layout('boilerplate') -%>
+
+    <div class="container-fluid container-newproject">
+
+        <div class="row-item row justify-content-center m-3  ">
+            <div class="col-item col-lg-8 col-md-10 col-12 p-lg-5 p-3 box-shadow">
+                <form action="/api/v1/projects/<%=projectObject[0].id%>/edit?_method=PUT" method="POST" class="validate-form" novalidate>
+
+
+                    <h1 class="text-center pb-3">EDIT PROJECT </h1>
+
+                    <section class="form-section">
+                        <div class="row my-3">
+                            <div class="col-lg-6 col-12 newprojectcol">
+                                <div
+                                    class="container-fluid img-field d-flex align-items-center justify-content-center ">
+                                    <i class="fa-solid fa-plus fa-4x"></i>
+
+                                </div>
+
+                            </div>
+
+                            <div
+                                class="col-lg-6 col-12 mt-lg-0 mt-2 newprojectcol d-flex flex-column justify-content-center">
+
+                                <!-- Project name input -->
+                                <div class="form-outline mb-1 flex-grow-1 ">
+                                    <label class="form-label" for="projectname">Project name</label>
+                                    <input type="text" id="projectname" class="form-control" name="projectname" value="<%=projectObject[0].projectname%>"
+                                        required />
+                                </div>
+
+                                <!-- Project description input -->
+                                <div class="form-outline mt-1 flex-grow-1 ">
+                                    <label class="form-label" for="projectdesc">Project description</label>
+                                    <textarea type="text" id="projectdesc" class="form-control" name="projectdesc" 
+                                        required rows="4"><%=projectObject[0].projectdesc%></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+
+                    <section class="form-section">
+                        <div class="row my-3">
+
+                            <!-- formclay input -->
+                            <div class="form-outline my-1">
+                                <label class="form-label" for="formclay">Form/Functionality</label>
+                                <input type="text" id="formclay" class="form-control" name="formclay"  value="<%=projectObject[0].formclay%>"/>
+                            </div>
+
+                            <!-- claytype input -->
+                            <div class="form-outline my-1">
+                                <label class="form-label" for="claytype">Clay type</label>
+                                <input type="text" id="claytype" class="form-control" name="claytype"  value="<%=projectObject[0].claytype%>"/>
+                            </div>
+
+                            <div class="row m-0">
+                                <div class="col-md-6 col-12 px-0">
+                                    <div class="row w-100">
+                                        <!-- startWeightClay input -->
+                                        <!-- startweightclay input -->
+                                    <div class="form-outline my-1 pr-1">
+                                        <label class="form-label" for="startweightclay">Weight clay:</label>
+                                        <input type="number" id="startweightclay" class="form-control"
+                                            name="startweightclay" value="<%=projectObject[0].startweightclay%>" />
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12 px-0">
+                                    <!-- dimensions input -->
+                                    <div class="row w-100">
+                                        <div class="form-outline my-1 pl-1">
+                                            <label class="form-label" for="dimensions">Dimensions (in cm): </label>
+                                            <div class="row w-100 m-0 p-0">
+                                                <input type="number" id="dimensions" class="col mx-1 form-control"
+                                                    name="dimensionsheight" placeholder="<%= projectObject[0].dimensionsheight%>cm" />
+                                                <input type="number" id="dimensions" class="col mx-1 form-control"
+                                                    name="dimensionslength" placeholder="<%= projectObject[0].dimensionslength%>cm" />
+                                                <input type="number" id="dimensions" class="col mx-1 form-control"
+                                                    name="dimensionswidth" placeholder="<%= projectObject[0].dimensionswidth%>cm" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- glazeType input -->
+                            <div class="form-outline my-1">
+                                <label class="form-label" for="glazetype">Glaze type</label>
+                                <input type="text" id="glazetype" class="form-control" name="glazetype" value="<%=projectObject[0].glazetype%>"/>
+                            </div>
+
+                            <!-- notes input -->
+                            <div class="form-outline my-1 ">
+                                <label class="form-label" for="notes">Notes:</label>
+                                <textarea type="text" id="notes" class="form-control" name="notes" rows="4" value="<%=projectObject[0].notes%>"></textarea>
+                            </div>
+
+                            <!-- imgurl input -->
+                            <div class="form-outline my-1">
+                                <label class="form-label" for="imgurl">Imgurl</label>
+                                <input type="text" id="imgurl" class="form-control" name="imgurl" value="<%=projectObject[0].imgurl%>"/>
+                            </div>
+
+
+
+
+
+
+                        </div>
+                        <!-- Submit button -->
+                        <!-- <button type="button" class="btn-next btn btn-block mb-4">Next</button> -->
+                        <button id="submit-button" type="submit" class="btn-submit btn btn-block mb-4">Submit</button>
+
+                    </section>
+
+
+                </form>
+
+            </div>
+        </div>
+    </div>

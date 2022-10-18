@@ -1,0 +1,59 @@
+<nav class="navbar navbar-expand-lg navbar-dark px-lg-5">
+  <div class="container-fluid mx-lg-5">
+    <a class="navbar-brand" href="/">MyCeramics</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav d-flex">
+
+        <li class="nav-item my-1">
+          <a class="nav-link" href="/api/v1/projects">All Projects</a>
+        </li>
+        <li class="nav-item my-1">
+          <a class="nav-link" href="/api/v1/account">My Account</a>
+        </li>
+        <li class="nav-item my-1">
+          <a class="nav-link" href="/api/v1/projects/kanban">Kanban</a>
+        </li>
+        <% if(!currentUser) {%>
+          <li class="nav-item my-1 d-lg-none align-self-center">
+            <button id="nav-button" type="button" class="btn btn-nav me-1"
+              onclick="window.location.href='/api/v1/login';">Login</button>
+         
+            <button id="nav-button" type="button" class="btn btn-nav ms-1"
+              onclick="window.location.href='/api/v1/register';">Register</button>
+          </li>
+          <% } else {%>
+            <li class="nav-item my-1 d-lg-none">
+              <form action="/api/v1/logout" method="POST">
+                <button id="nav-button" type="submit" class="btn btn-nav">Logout</button>
+              </form>
+            </li>
+
+            <% } %>
+
+
+
+      </ul>
+    </div>
+    <div class="navbar-nav ml-auto d-none d-lg-flex">
+
+      <% if(!currentUser) {%>
+        <button id="nav-button" type="button" class="btn btn-nav mx-2"
+          onclick="window.location.href='/api/v1/login';">Login</button>
+
+        <button id="nav-button" type="button" class="btn btn-nav mx-2"
+          onclick="window.location.href='/api/v1/register';">Register</button>
+
+        <% } else {%>
+          <form action="/api/v1/logout" method="POST">
+            <button id="nav-button" type="submit" class="btn btn-nav mx-2">Logout</button>
+          </form>
+
+          <% } %>
+    </div>
+
+  </div>
+</nav>
