@@ -37,7 +37,7 @@ const getUserById = (req, res) => {
 };
 const getAccount = (req, res) => {
 
-    const user_id = parseInt(req.user.id);
+    const user_id = (req.user.id);
 
     pool.query(queries.getUserById, [user_id], (err, results) => {
         if (err) throw err;
@@ -50,7 +50,7 @@ const getAccount = (req, res) => {
 };
 const updateAccount = (req, res) => {
 
-    const user_id = parseInt(req.user.id);
+    const user_id = (req.user.id);
     const { firstname, lastname, dob } = req.body;
 
     pool.query(queries.updateAccount, [user_id, firstname, lastname, dob || null], (err, results) => {

@@ -19,7 +19,6 @@ CREATE TABLE projects2 (
     startDate DATE DEFAULT NOW()::DATE NOT NULL,
     thrown BOOLEAN DEFAULT False NOT NULL,
     thrownDate DATE,
-    thrownImg VARCHAR(1000000),
     trimmed BOOLEAN DEFAULT False NOT NULL,
     trimmedDate DATE,
     trimmedImg VARCHAR(1000000),
