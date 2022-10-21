@@ -4,8 +4,9 @@
 
         <div class="row-item row justify-content-center m-3">
             <div class="col-item col-lg-8 col-md-10 col-12 p-lg-5 p-3 box-shadow">
-                <form action="/api/v1/projects/newpost" method="POST" class="validate-form" novalidate>
-
+                <form id="newprojectform" action="/api/v1/projects/newpost" method="POST" class="validate-form"
+                    novalidate   enctype="multipart/form-data" >
+                    <!-- enctype="multipart/form-data"  -->
 
                     <h1 class="text-center pb-3">CREATE NEW PROJECT </h1>
 
@@ -105,25 +106,45 @@
                             <!-- imgurl input -->
                             <div class="form-outline my-1">
                                 <label class="form-label" for="imgurl">Imgurl</label>
-                                <input type="text" id="imgurl" class="form-control" name="imgurl" />
+                                <input type="text" id="imgurl" class="form-control" name="imgurl" multiple />
                             </div>
 
 
+                            <div class="form-group">
+                                <label for="upload-image-file"></label>
+                                <input type="file" class="form-control-file" name="upload" id="upload"
+                                    placeholder="upload-image-file" aria-describedby="fileHelpId">
+                                <small id="fileHelpId" class="form-text text-muted">Please select the image to be
+                                    uploaded...</small>
 
 
+                            </div>
 
-                        </div>
-                        <!-- Submit button -->
-                        <!-- <button type="button" class="btn-next btn btn-block mb-4">Next</button> -->
-                        <button id="submit-button" type="submit" class="btn-submit btn btn-block mb-4">Submit</button>
-
-                    </section>
+                            <!-- <div class="form-file custom-file">
+                                <input type="file" class="form-file-input" id="upload" name="upload" >
+                                <label class="form-file-label" for="image">
+                                    <span class="form-file-text custom-file-label">Choose image(s)...</span>
+                                    <span class="form-file-button">Browse</span>
+                                </label>
+                            </div> -->
 
 
                 </form>
 
+
             </div>
+            <!-- Submit button -->
+            <!-- <button type="button" class="btn-next btn btn-block mb-4">Next</button> -->
+            <button id="submit-button" type="submit" form="newprojectform"
+                class="btn-submit btn btn-block mb-4">Submit</button>
+
+            </section>
+
+
+            </form>
+
         </div>
+    </div>
     </div>
 
 

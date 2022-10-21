@@ -1,12 +1,28 @@
 const { pool } = require('../../db');
 const queries = require('./queries');
 
+
+// Cloudinary upset
+const http = require('http');
+const util = require('util');
+
+const cloudinary = require("cloudinary");
+require("dotenv").config();
+
+// const Formidable = require('formidable');
+const Formidable = require('formidable-serverless');
+
+
+const path = require('path');
+
 const getAllProjectsController = (req, res) => {
     const user_id = (req.user.id);
     pool.query(queries.getAllProjects, [user_id], (err, results) => {
         if (err) throw err;
         // res.status(200).json(results.rows);
         let projectObject = results.rows;
+
+
         res.render('projects/index', { projectObject });
     })
 };
@@ -32,7 +48,6 @@ const getProjectByIdController = (req, res) => {
 
         res.render(`projects/show`, { projectObject });
     });
-
 };
 
 const getProjectByIdEditController = (req, res) => {
@@ -55,28 +70,36 @@ const getNewProjectFormController = (req, res) => {
     res.render('projects/new');
 };
 
-const addNewProjectController = (req, res) => {
-    const { projectname, projectdesc, thrown, trimmed, bisque, glazed, glazefired, imgurl, formclay, claytype, startweightclay, dimensionsheight, dimensionswidth, dimensionslength, glazetype, notes
-    } = req.body;
+const addNewProjectController = async (req, res) => {
 
     const user_id = (req.user.id);
 
-    //check if project_name exists in dbceramics.projects
-    pool.query(queries.checkExistingProjects, [projectname], (err, results) => {
-        if (results.rows.length) { //if there are resulting rows from the query, returns true, meaning this project already exists in dbceramics
-            res.send("Project already exists.");
-        } else {
-            //add new project to dbceramics.projects
-            pool.query(
-                queries.addNewProject,
-                [projectname,
-                    projectdesc,
+    const form = new Formidable();
+
+    form.parse(req, async (err, fields, files) => {
+
+        console.log('started form parse cloudinary')
+
+        const { projectname, projectdesc, thrown, trimmed, bisque, glazed, glazefired, imgurl, formclay, claytype, startweightclay, dimensionsheight, dimensionswidth, dimensionslength, glazetype, notes
+        } = fields;
+
+
+        //check if project_name exists in dbceramics.projects
+        await pool.query(queries.checkExistingProjects, [projectname], (err, results) => {
+            if (results.rows.length) { //if there are resulting rows from the query, returns true, meaning this project already exists in dbceramics
+                res.send("Project already exists.");
+            } else {
+                //add new project to dbceramics.projects
+                pool.query(
+                    queries.addNewProject,
+                    [projectname || "default",
+                    projectdesc || "default",
                     thrown || false,
                     trimmed || false,
                     bisque || false,
                     glazed || false,
                     glazefired || false,
-                    imgurl || "https://images.unsplash.com/photo-1595351298020-038700609878?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+                    imgurl || "",
                     formclay || "",
                     claytype || "",
                     startweightclay || 0,
@@ -85,20 +108,63 @@ const addNewProjectController = (req, res) => {
                     dimensionslength || 0,
                     glazetype || "",
                     notes || "",
-                    user_id
-                ],
-                (err, results) => {
-                    if (err) throw err;
-                    // res.status(201).send('Project succesfully added!');
-
-                    pool.query(`SELECT * FROM projects2 WHERE projectname=$1`, [projectname], (err, results) => {
+                        user_id],
+                    async (err, results) => {
+                        if (err) throw err;
+                        // res.status(201).send('Project succesfully added!');
                         let projectObject = results.rows;
-                        console.log(results.rows)
+                        console.log(projectObject)
+
+                        // Find Cloudinary documentation using the link below
+                        // https://cloudinary.com/documentation/upload_images
+                        await cloudinary.uploader.upload(files.upload.path, result => {
+
+                            // This will return the output after the code is exercuted both in the terminal and web browser
+                            // When successful, the output will consist of the metadata of the uploaded file one after the other. These include the name, type, size and many more.
+                            console.log(result)
+                            const uploadObject = {
+                                title: result.asset_id,
+                                cloudinary_id: result.public_id,
+                                image_url: result.secure_url
+                            }
+
+                            pool.query(`INSERT INTO images (title, cloudinary_id, image_url, project_id) VALUES($1,$2,$3, $4) RETURNING *`, [uploadObject.title, uploadObject.cloudinary_id, uploadObject.image_url, projectObject[0].id], (err, results) => {
+                                if (err) throw err;
+                                const imageObject = results.rows;
+                                console.log('inserted query into db')
+
+
+
+                                pool.query(`UPDATE projects2 SET imgurl = $1 WHERE id = $2`, [uploadObject.image_url, imageObject[0].project_id], (err, results) => {
+                                    if (err) throw err;
+
+                                })
+                            })
+                            // if (result.public_id) {
+                            //     // The results in the web browser will be returned inform of plain text formart. We shall use the util that we required at the top of this code to do this.
+                            //     res.writeHead(200, { 'content-type': 'text/plain' });
+                            //     res.write('received uploads:\n\n');
+                            //     res.end(util.inspect({ fields: fields, files: files }));
+                            // }
+
+                        }, { folder: 'dbceramics' });
+
+
+
                         res.redirect(`/api/v1/projects/${projectObject[0].id}`);
+
                     });
-                });
-        };
+            };
+
+
+        });
+
+
     });
+
+
+
+
 };
 
 const editProjectController = (req, res) => {
@@ -310,10 +376,27 @@ const deleteProjectController = (req, res) => {
             res.send(`Project with id ${projectid} does not exist.`);
         } else {
 
-            pool.query(queries.deleteProject, [projectid], (err) => { //[id] variable that is passed into the query deleteCreator that's taken from req parameters-> the id in the route
+            pool.query(`DELETE FROM images WHERE project_id = $1 RETURNING cloudinary_id`, [projectid], (err, results) => { //[id] variable that is passed into the query deleteCreator that's taken from req parameters-> the id in the route
                 if (err) throw err;
-                console.log(`Deleted project with id:${projectid}`);
-                res.redirect(`/api/v1/projects`);
+
+                const { cloudinary_id } = (results.rows);
+                // DIT DEEL WERKT NOG NIET _ OOK OP CLOUDINARY MOET DE AFBEELDING VERWIJDERT WORDEN
+                cloudinary.uploader
+                    .destroy(`${cloudinary_id}`)
+                    .then((result) => {
+                        console.log('cloudinary deleted this image')
+                    })
+                    .catch((error) => {
+                        console.log('NOT cloudinary deleted this image')
+                    });
+
+                pool.query(queries.deleteProject, [projectid], (err) => { //[id] variable that is passed into the query deleteCreator that's taken from req parameters-> the id in the route
+                    if (err) throw err;
+                    console.log(`Deleted project with id:${projectid}`);
+                    res.redirect(`/api/v1/projects`);
+
+                });
+
 
             });
 

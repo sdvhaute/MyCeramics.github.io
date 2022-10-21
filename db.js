@@ -24,7 +24,7 @@ const pool = new Pool({
   ssl: isProduction
 });
 
-module.exports = {pool}  ;
+module.exports = { pool };
 
 
 // jumbo-marmot password dxwM66bHqatiT_RGi94fcA
@@ -67,7 +67,17 @@ module.exports = {pool}  ;
 //     // res.status(200).json(results.rows);
 //     return;
 //   })
-
+// pool.query(`CREATE TABLE IF NOT EXISTS  images( id SERIAL PRIMARY KEY, title VARCHAR(128) NOT NULL, cloudinary_id VARCHAR(128) NOT NULL, image_url VARCHAR(128) NOT NULL, project_id SERIAL REFERENCES projects2(id) NOT NULL )`,
+//   (err, results) => {
+//     if (err) throw err;
+//     // res.status(200).json(results.rows);
+//     return;
+//   })
+// pool.query( 'DROP TABLE images', (err, results) => {
+//     if (err) throw err;
+//     // res.status(200).json(results.rows);
+//     return;
+//   })
 
 
 module.exports = { pool };

@@ -6,22 +6,29 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 const flash = require('express-flash');
 const session = require('express-session');
-const cloudinary = require("cloudinary");
-
-require("dotenv").config();
 
 const { pool } = require("./db");
 
-const initializePassport = require('./public/scripts/passport-config');
+// Cloudinary upset
+const http = require('http');
+const util = require('util');
 
-initializePassport(passport);
+const cloudinary = require("cloudinary");
+require("dotenv").config();
 
-// cloudinary configuration
+const Formidable = require('formidable');
+
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.API_KEY,
   api_secret: process.env.API_SECRET
 });
+
+
+const initializePassport = require('./public/scripts/passport-config');
+
+initializePassport(passport);
+
 
 
 
@@ -36,7 +43,7 @@ const port = 2000;
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'))
 
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.engine('ejs', ejsMate);

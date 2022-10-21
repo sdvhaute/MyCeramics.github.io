@@ -12,7 +12,7 @@ const checkExistingProjects = "SELECT * FROM projects2 WHERE projectname=$1";
 
 const addNewProject =
     // "INSERT INTO projects2 (projectname, projectdesc, thrown, trimmed, bisque, glazed, glazefired, user_id, imgurl) VALUES ($1, $2, $3, $4, $5, $6 ,$7 ,$8 ,$9)";
-    "INSERT INTO projects2 (projectname, projectdesc, thrown, trimmed, bisque, glazed, glazefired, imgurl, formclay, claytype, startweightclay, dimensionsheight, dimensionswidth, dimensionslength, glazetype, notes, user_id) VALUES ($1, $2, $3, $4, $5, $6 ,$7 ,$8 ,$9, $10, $11, $12, $13, $14, $15, $16, $17)";
+    "INSERT INTO projects2 (projectname, projectdesc, thrown, trimmed, bisque, glazed, glazefired, imgurl, formclay, claytype, startweightclay, dimensionsheight, dimensionswidth, dimensionslength, glazetype, notes, user_id) VALUES ($1, $2, $3, $4, $5, $6 ,$7 ,$8 ,$9, $10, $11, $12, $13, $14, $15, $16, $17)  RETURNING *";
 
 
 const editProject =
