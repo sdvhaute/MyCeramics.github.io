@@ -16,7 +16,7 @@
                                     <div class="form-outline mb-4">
                                         <!-- <label class="form-label" for="firstname">firstname</label> -->
                                         <input type="text" id="firstname" class="form-control" name="firstname"
-                                            placeholder="First Name" required/>
+                                            placeholder="First Name" required />
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-12">
@@ -24,11 +24,11 @@
                                     <div class="form-outline mb-4">
                                         <!-- <label class="form-label" for="lastname">lastname</label> -->
                                         <input type="text" id="lastname" class="form-control" name="lastname"
-                                            placeholder="Last Name" required/>
+                                            placeholder="Last Name" required />
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="row">
                                 <div class="col-12">
                                     <!-- Email input -->
@@ -42,9 +42,9 @@
                             <div class="row">
                                 <div class="col-md-6 col-12">
                                     <!-- Password input -->
-                                    <div class="form-outline mb-4">
+                                    <div class="form-outline form-pass mb-4">
                                         <!-- <label class="form-label" for="password">Password</label> -->
-                                        <input type="password" id="password" class="form-control" name="password"
+                                        <input onchange="onChange()" type="password" id="password" class="form-control" name="password"
                                             placeholder="Enter Password" required />
                                     </div>
                                 </div>
@@ -52,8 +52,9 @@
                                     <!-- Repeat Password input -->
                                     <div class="form-outline mb-4">
                                         <!-- <label class="form-label" for="psw-repeat">Password</label> -->
-                                        <input type="password" id="psw-repeat" class="form-control" name="psw-repeat"
-                                            placeholder="Repeat Password" required />
+                                        <input onchange="onChange()" type="password" id="psw-repeat"
+                                            class="form-control" name="psw-repeat" placeholder="Repeat Password"
+                                            required />
                                     </div>
                                 </div>
                             </div>
@@ -74,3 +75,32 @@
         </div>
 
     </div>
+
+
+    <!-- <script>
+
+        // Check password & password repeat field in register form
+
+        formPass = document.querySelector('.form-pass');
+        inputPass = document.querySelector('#password');
+        inputPassRepeat = document.querySelector('#psw-repeat');
+
+        let invalidDiv = document.createElement("div");
+        invalidDiv.innerHTML='Passwords are not the same';
+
+        function onChange() {
+
+            console.log("start password validation function")
+            if (inputPass.value !== inputPassRepeat.value) {
+
+                console.log("if statement")
+                formPass.appendChild(invalidDiv).classList.add('valid-feedback');
+
+               
+                
+            } 
+
+        };
+
+
+    </script> -->

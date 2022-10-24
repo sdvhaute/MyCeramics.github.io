@@ -81,64 +81,59 @@ const addNewProjectController = async (req, res) => {
         const { projectname, projectdesc, thrown, trimmed, bisque, glazed, glazefired, imgurl, formclay, claytype, startweightclay, dimensionsheight, dimensionswidth, dimensionslength, glazetype, notes
         } = fields;
 
-        //check if project_name exists in dbceramics.projects
-        pool.query(queries.checkExistingProjects, [projectname], (err, results) => {
-            if (results.rows.length) { //if there are resulting rows from the query, returns true, meaning this project already exists in dbceramics
-                res.send("Project already exists.");
-            } else {
-                //add new project to dbceramics.projects
-                pool.query(
-                    queries.addNewProject,
-                    [projectname,
-                        projectdesc,
-                        thrown || false,
-                        trimmed || false,
-                        bisque || false,
-                        glazed || false,
-                        glazefired || false,
-                        formclay || "",
-                        claytype || "",
-                        startweightclay || 0,
-                        dimensionsheight || 0,
-                        dimensionswidth || 0,
-                        dimensionslength || 0,
-                        glazetype || "",
-                        notes || "",
-                        imgurl || "https://images.unsplash.com/photo-1595351298020-038700609878?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-                        user_id],
-                    (err, results) => {
-                        if (err) throw err;
-                        let projectObject = results.rows;
 
-                        // Find Cloudinary documentation using the link below
-                        // https://cloudinary.com/documentation/upload_images
+        //add new project to dbceramics.projects
+        pool.query(
+            queries.addNewProject,
+            [projectname,
+                projectdesc,
+                thrown || false,
+                trimmed || false,
+                bisque || false,
+                glazed || false,
+                glazefired || false,
+                formclay || "",
+                claytype || "",
+                startweightclay || 0,
+                dimensionsheight || 0,
+                dimensionswidth || 0,
+                dimensionslength || 0,
+                glazetype || "",
+                notes || "",
+                imgurl || "https://images.unsplash.com/photo-1595351298020-038700609878?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+                user_id],
+            (err, results) => {
+                if (err) throw err;
+                let projectObject = results.rows;
 
-                        if (files.upload.size !== 0) {
-                            cloudinary.uploader.upload(files.upload.path, result => {
-                                const uploadObject = {
-                                    title: result.asset_id,
-                                    cloudinary_id: result.public_id,
-                                    image_url: result.secure_url
-                                }
+                // Find Cloudinary documentation using the link below
+                // https://cloudinary.com/documentation/upload_images
 
-                                pool.query(`INSERT INTO images (title, cloudinary_id, image_url, project_id) VALUES($1,$2,$3, $4) RETURNING *`, [uploadObject.title, uploadObject.cloudinary_id, uploadObject.image_url, projectObject[0].id], (err, results) => {
-                                    if (err) throw err;
-                                    const imageObject = results.rows;
-
-                                    pool.query(`UPDATE projects2 SET imgurl = $1 WHERE id = $2`, [uploadObject.image_url, imageObject[0].project_id], (err, results) => {
-                                        if (err) throw err;
-                                        res.redirect(`/api/v1/projects/${projectObject[0].id}`);
-                                    })
-                                })
-
-                            }, { folder: 'dbceramics' });
-
-                        } else {
-                            res.redirect(`/api/v1/projects/${projectObject[0].id}`);
+                if (files.upload.size !== 0) {
+                    cloudinary.uploader.upload(files.upload.path, result => {
+                        const uploadObject = {
+                            title: result.asset_id,
+                            cloudinary_id: result.public_id,
+                            image_url: result.secure_url
                         }
-                    });
-            };
-        });
+
+                        pool.query(`INSERT INTO images (title, cloudinary_id, image_url, project_id) VALUES($1,$2,$3, $4) RETURNING *`, [uploadObject.title, uploadObject.cloudinary_id, uploadObject.image_url, projectObject[0].id], (err, results) => {
+                            if (err) throw err;
+                            const imageObject = results.rows;
+
+                            pool.query(`UPDATE projects2 SET imgurl = $1 WHERE id = $2`, [uploadObject.image_url, imageObject[0].project_id], (err, results) => {
+                                if (err) throw err;
+                                res.redirect(`/api/v1/projects/${projectObject[0].id}`);
+                            })
+                        })
+
+                    }, { folder: 'dbceramics' });
+
+                } else {
+                    res.redirect(`/api/v1/projects/${projectObject[0].id}`);
+                }
+            });
+
     });
 };
 
