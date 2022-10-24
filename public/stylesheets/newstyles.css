@@ -549,6 +549,12 @@ a:hover {
 
 }
 
+/* My account page */
+
+.btn-danger {
+    background-color: red;
+}
+
 /* new project page */
 
 .container-newproject .row-item .col-item {

@@ -45,39 +45,48 @@ module.exports = { pool };
 //   }
 // })();
 
-// pool.query('CREATE TABLE users2 (  ID SERIAL PRIMARY KEY,  email VARCHAR(200) NOT NULL,  password VARCHAR(200) NOT NULL,  firstname VARCHAR(200),  lastname VARCHAR(200),  dob DATE)',
+// pool.query('CREATE TABLE IF NOT EXISTS users (  ID SERIAL PRIMARY KEY,  email VARCHAR(200) NOT NULL,  password VARCHAR(200) NOT NULL,  firstname VARCHAR(200),  lastname VARCHAR(200))',
 //   (err, results) => {
 //     if (err) throw err;
 //     // res.status(200).json(results.rows);
 //     return;
 //   })
-// pool.query('CREATE TABLE projects2 (    ID SERIAL PRIMARY KEY,    projectname VARCHAR(30) NOT NULL,    projectdesc VARCHAR(100) NOT NULL,    imgurl VARCHAR(1000000),    startdate DATE DEFAULT NOW()::DATE NOT NULL,    thrown BOOLEAN DEFAULT False NOT NULL,    throwndate DATE,    trimmed BOOLEAN DEFAULT False NOT NULL,    trimmeddate DATE,    bisque BOOLEAN DEFAULT False NOT NULL,    bisquedate DATE,    glazed BOOLEAN DEFAULT False NOT NULL,    glazeddate DATE,    glazefired BOOLEAN DEFAULT False NOT NULL,    glazefireddate DATE,    formclay VARCHAR(1000),    claytype VARCHAR(1000),    startweightclay INT,    dimensionsheight INT,    dimensionslength INT,    dimensionswidth INT,    glazetype VARCHAR(1000),    notes VARCHAR(1000000),    user_id SERIAL REFERENCES users(id) NOT NULL);',
+
+// pool.query('CREATE TABLE IF NOT EXISTS projects2 (    ID SERIAL PRIMARY KEY,    projectname VARCHAR(30) NOT NULL,    projectdesc VARCHAR(100) NOT NULL,    imgurl VARCHAR(1000000),    startdate DATE DEFAULT NOW()::DATE NOT NULL,    thrown BOOLEAN DEFAULT False NOT NULL,    throwndate DATE,    trimmed BOOLEAN DEFAULT False NOT NULL,    trimmeddate DATE,    bisque BOOLEAN DEFAULT False NOT NULL,    bisquedate DATE,    glazed BOOLEAN DEFAULT False NOT NULL,    glazeddate DATE,    glazefired BOOLEAN DEFAULT False NOT NULL,    glazefireddate DATE,    formclay VARCHAR(1000),    claytype VARCHAR(1000),    startweightclay INT,    dimensionsheight INT,    dimensionslength INT,    dimensionswidth INT,    glazetype VARCHAR(1000),    notes VARCHAR(1000000),    user_id SERIAL REFERENCES users(id) ON DELETE CASCADE);',
 //   (err, results) => {
 //     if (err) throw err;
 //     // res.status(200).json(results.rows);
 //     return;
 //   })
-// pool.query( 'DROP TABLE projects2', (err, results) => {
-//     if (err) throw err;
-//     // res.status(200).json(results.rows);
-//     return;
-//   })
-// pool.query( 'DROP TABLE users2', (err, results) => {
-//     if (err) throw err;
-//     // res.status(200).json(results.rows);
-//     return;
-//   })
-// pool.query(`CREATE TABLE IF NOT EXISTS  images( id SERIAL PRIMARY KEY, title VARCHAR(128) NOT NULL, cloudinary_id VARCHAR(128) NOT NULL, image_url VARCHAR(128) NOT NULL, project_id SERIAL REFERENCES projects2(id) NOT NULL )`,
+
+// pool.query(`CREATE TABLE IF NOT EXISTS  images( id SERIAL PRIMARY KEY, title VARCHAR(128) NOT NULL, cloudinary_id VARCHAR(128) NOT NULL, image_url VARCHAR(128) NOT NULL, project_id SERIAL REFERENCES projects2(id) ON DELETE CASCADE)`,
 //   (err, results) => {
 //     if (err) throw err;
 //     // res.status(200).json(results.rows);
 //     return;
 //   })
-// pool.query( 'DROP TABLE images', (err, results) => {
-//     if (err) throw err;
-//     // res.status(200).json(results.rows);
-//     return;
-//   })
+
+// pool.query('DROP TABLE images', (err, results) => {
+//   if (err) throw err;
+//   // res.status(200).json(results.rows);
+//   console.log("Dropped images table")
+//   return;
+// })
+// pool.query('DROP TABLE projects2', (err, results) => {
+//   if (err) throw err;
+//   // res.status(200).json(results.rows);
+//   console.log("Dropped projects table")
+//   return;
+// })
+// pool.query('DROP TABLE users', (err, results) => {
+//   if (err) throw err;
+//   // res.status(200).json(results.rows);
+//   console.log("Dropped users table")
+//   return;
+// })
+
+
+
 
 
 module.exports = { pool };

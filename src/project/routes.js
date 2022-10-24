@@ -33,10 +33,10 @@ router.put('/:projectid/checkGlazeFired', isLoggedIn, controller.checkGlazeFired
 
 router.put('/:projectid/updateNotes', isLoggedIn, controller.updateNotes); 
 
-router.delete('/:projectid/delete', isLoggedIn, controller.deleteProjectController);
 
 router.post('/newpost', isLoggedIn, controller.addNewProjectController); //new page
 
 
+router.delete('/:projectid/delete', isLoggedIn, controller.deleteProjectController);
 
 module.exports = router;

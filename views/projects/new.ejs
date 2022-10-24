@@ -5,24 +5,14 @@
         <div class="row-item row justify-content-center m-3">
             <div class="col-item col-lg-8 col-md-10 col-12 p-lg-5 p-3 box-shadow">
                 <form id="newprojectform" action="/api/v1/projects/newpost" method="POST" class="validate-form"
-                    novalidate   enctype="multipart/form-data" >
+                    novalidate enctype="multipart/form-data">
                     <!-- enctype="multipart/form-data"  -->
 
                     <h1 class="text-center pb-3">CREATE NEW PROJECT </h1>
 
                     <section class="form-section">
                         <div class="row my-3">
-                            <div class="col-lg-6 col-12 newprojectcol">
-                                <div
-                                    class="container-fluid img-field d-flex align-items-center justify-content-center ">
-                                    <i class="fa-solid fa-plus fa-4x"></i>
-
-                                </div>
-
-                            </div>
-
-                            <div
-                                class="col-lg-6 col-12 mt-lg-0 mt-2 newprojectcol d-flex flex-column justify-content-center">
+                            <div class="col-12 mt-lg-0 mt-2 newprojectcol d-flex flex-column justify-content-center">
 
                                 <!-- Project name input -->
                                 <div class="form-outline mb-1 flex-grow-1 ">
@@ -35,11 +25,22 @@
                                 <div class="form-outline mt-1 flex-grow-1 ">
                                     <label class="form-label" for="projectdesc">Project description</label>
                                     <textarea type="text" id="projectdesc" class="form-control" name="projectdesc"
-                                        required rows="4"></textarea>
+                                        rows="4" required></textarea>
+                                </div>
+                                <!-- Image input -->
+                                <div class="input-group form-outline mt-1 ">
+                                    <label class="form-label" for="projectdesc">Image</label>
+
+                                    <div class="col-12 mt-0 d-flex align-items-start">
+                                        <label for="input-group-text"></label>
+                                        <input type="file" class="form-control form-control-file" name="upload"
+                                            id="upload" placeholder="upload-image-file" aria-describedby="fileHelpId">
+                                    </div>
                                 </div>
 
                             </div>
                         </div>
+
                         <!-- NExt button -->
                         <button id="next-button" type="button" class="btn-next btn btn-block mb-4">Next</button>
 
@@ -102,32 +103,6 @@
                                 <label class="form-label" for="notes">Notes:</label>
                                 <textarea type="text" id="notes" class="form-control" name="notes" rows="4"></textarea>
                             </div>
-
-                            <!-- imgurl input -->
-                            <div class="form-outline my-1">
-                                <label class="form-label" for="imgurl">Imgurl</label>
-                                <input type="text" id="imgurl" class="form-control" name="imgurl" multiple />
-                            </div>
-
-
-                            <div class="form-group">
-                                <label for="upload-image-file"></label>
-                                <input type="file" class="form-control-file" name="upload" id="upload"
-                                    placeholder="upload-image-file" aria-describedby="fileHelpId">
-                                <small id="fileHelpId" class="form-text text-muted">Please select the image to be
-                                    uploaded...</small>
-
-
-                            </div>
-
-                            <!-- <div class="form-file custom-file">
-                                <input type="file" class="form-file-input" id="upload" name="upload" >
-                                <label class="form-file-label" for="image">
-                                    <span class="form-file-text custom-file-label">Choose image(s)...</span>
-                                    <span class="form-file-button">Browse</span>
-                                </label>
-                            </div> -->
-
 
                 </form>
 

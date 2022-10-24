@@ -15,6 +15,8 @@ const router = Router();
 router.get('/account', isLoggedIn, controller.getAccount);
 router.put('/account', isLoggedIn, controller.updateAccount);
 
+router.delete('/account', isLoggedIn, controller.deleteAccount);
+
 // REGISTER ROUTES
 
 router.get('/register', checkNotAuthenticated, controller.getRegisterForm);
@@ -34,7 +36,6 @@ router.post('/login', checkNotAuthenticated,
 
 // LOGOUT 
 router.post('/logout', controller.postLogoutUser);
-
 
 
 module.exports = router;
