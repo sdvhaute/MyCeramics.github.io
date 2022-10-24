@@ -1,1 +1,12 @@
 .env
+
+dbinit.sql
+
+klad.txt
+
+# to activate new files added to .gitignore: run in terminal after adding new file to gitignore and saving
+
+# git rm -r --cached .
+# git add .
+# git commit -m ".gitignore is now working"
+
