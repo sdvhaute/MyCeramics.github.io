@@ -1,5 +1,5 @@
 # MyCeramics.github.io
-Website for tracking your ceramic projects
+Website for tracking ceramic projects
 
 ## 1/ Create an account & log in 
 
@@ -11,13 +11,12 @@ Website for tracking your ceramic projects
 - Add other parameters such as: form, type of clay, type of glaze, starting weight of your clay, dimensions and additional notes
 
 <img src="/images/createNewProjectPart1.png"  width="500">
-
 <img src="/images/createNewProjectPart2.png"  width="500">
 
 ## 3/ Detailed view of a project
 
 - keep track of the stage of your ceramic project: thrown, trimmed, biscuit baked, glazed and finished after a glaze fire
-- the app track which stage has been finished and when
+- the app tracks which stages have been finished and when
 
 <img src="/images/showPage.png"  width="800">
 
