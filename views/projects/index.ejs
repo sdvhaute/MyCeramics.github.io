@@ -4,7 +4,7 @@
     <div class="container-fluid container-intro p-0 d-flex justify-content-center align-items-center">
         <% if(currentUser) {%>
             <h1 class="intro-message">
-                Hello <%= currentUser.firstname %>!!
+                Hello <%= currentUser.firstname %> <%= currentUser.lastname %>!
             </h1>
             <% } %>
                 <button id="new-project-button" type="button" class="btn btn-dark "
@@ -38,6 +38,8 @@
                 <%}%>
 
     </div>
+
+    
 
     <div class="container-catalogue pb-lg-4 p-2">
 

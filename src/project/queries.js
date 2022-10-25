@@ -3,9 +3,6 @@ const getProjectById = "SELECT *, experimental_strftime(startdate::date, '%Y-%m-
 
 // , TO_CHAR(startdate::date, 'dd/mm/yyyy') startdate, TO_CHAR(throwndate::date, 'dd/mm/yyyy') throwndate, TO_CHAR(trimmeddate::date, 'dd/mm/yyyy') trimmeddate, TO_CHAR(bisquedate::date, 'dd/mm/yyyy') bisquedate, TO_CHAR(glazeddate::date, 'dd/mm/yyyy') glazeddate, TO_CHAR(glazefireddate::date, 'dd/mm/yyyy') glazefireddate
 // , TO_CHAR(startdate::date, 'dd/mm/yyyy') startdate, TO_CHAR(throwndate::date, 'dd/mm/yyyy') throwndate, TO_CHAR(trimmeddate::date, 'dd/mm/yyyy') trimmeddate, TO_CHAR(bisquedate::date, 'dd/mm/yyyy') bisquedate, TO_CHAR(glazeddate::date, 'dd/mm/yyyy') glazeddate, TO_CHAR(glazefireddate::date, 'dd/mm/yyyy') glazefireddate
-
-
-
 // experimental_strftime(created_at, '%Y-%m-%d') to_char does not work in cockroachdb
 
 const checkExistingProjects = "SELECT * FROM projects2 WHERE projectname=$1";
@@ -25,7 +22,7 @@ const updateProjectParameters =
 const searchString =
     "SELECT * FROM projects2 WHERE $1 IN (projectname, projectdesc) AND user_id=$2";
 
-const deleteProject = "DELETE FROM projects2 WHERE id = $1";
+const deleteProject = "DELETE FROM projects2 WHERE id = $1 RETURNING *";
 
 module.exports = {
     getAllProjects,

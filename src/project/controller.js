@@ -7,19 +7,49 @@ require("dotenv").config();
 const Formidable = require('formidable-serverless');
 
 
-const path = require('path');
-
 const getAllProjectsController = (req, res) => {
     const user_id = (req.user.id);
     pool.query(queries.getAllProjects, [user_id], (err, results) => {
         if (err) throw err;
-        // res.status(200).json(results.rows);
         let projectObject = results.rows;
-
-
         res.render('projects/index', { projectObject });
     })
 };
+const getActivityController = (req, res) => {
+    const user_id = (req.user.id);
+
+    pool.query(`SELECT * FROM projects2 WHERE thrown = false AND trimmed = false AND bisque = false AND glazed = false AND glazefired= false `, (err, results) => {
+        if (err) throw err;
+        let countNew = results.rows.length;
+        pool.query(`SELECT * FROM projects2 WHERE thrown = true`, (err, results) => {
+            if (err) throw err;
+            let countThrown = results.rows.length;
+            pool.query(`SELECT * FROM projects2 WHERE trimmed = true`, (err, results) => {
+                if (err) throw err;
+                let countTrimmed = results.rows.length;
+                pool.query(`SELECT * FROM projects2 WHERE bisque = true`, (err, results) => {
+                    if (err) throw err;
+                    let countBisque = results.rows.length;
+                    pool.query(`SELECT * FROM projects2 WHERE glazed = true`, (err, results) => {
+                        if (err) throw err;
+                        let countGlazed = results.rows.length;
+                        pool.query(`SELECT * FROM projects2 WHERE glazefired = true`, (err, results) => {
+                            if (err) throw err;
+                            let countFinished = results.rows.length;
+                            pool.query(queries.getAllProjects, [user_id], (err, results) => {
+                                if (err) throw err;
+                                let projectObject = results.rows;
+                                res.render('projects/activity', { projectObject, countNew, countTrimmed, countThrown, countBisque, countGlazed, countFinished });
+                            })
+
+                        })
+                    })
+                })
+            })
+        })
+    })
+};
+
 const getAllProjectsKanbanController = (req, res) => {
     const user_id = (req.user.id);
     pool.query(queries.getAllProjects, [user_id], (err, results) => {
@@ -30,16 +60,13 @@ const getAllProjectsKanbanController = (req, res) => {
     })
 };
 
-
 const getProjectByIdController = (req, res) => {
     const projectId = (req.params.projectid);
     const user_id = (req.user.id);
 
-
     pool.query(queries.getProjectById, [projectId, user_id], (err, results) => {
         if (err) throw err;
         let projectObject = results.rows;
-
         res.render(`projects/show`, { projectObject });
     });
 };
@@ -48,14 +75,11 @@ const getProjectByIdEditController = (req, res) => {
     const projectId = (req.params.projectid);
     const user_id = (req.user.id);
 
-
     pool.query(queries.getProjectById, [projectId, user_id], (err, results) => {
         if (err) throw err;
         let projectObject = results.rows;
-
         res.render(`projects/edit`, { projectObject });
     });
-
 };
 
 
@@ -74,7 +98,6 @@ const addNewProjectController = async (req, res) => {
 
         const { projectname, projectdesc, thrown, trimmed, bisque, glazed, glazefired, imgurl, formclay, claytype, startweightclay, dimensionsheight, dimensionswidth, dimensionslength, glazetype, notes
         } = fields;
-
 
         //add new project to dbceramics.projects
         pool.query(
@@ -117,6 +140,7 @@ const addNewProjectController = async (req, res) => {
 
                             pool.query(`UPDATE projects2 SET imgurl = $1 WHERE id = $2`, [uploadObject.image_url, imageObject[0].project_id], (err, results) => {
                                 if (err) throw err;
+                                req.flash('success', 'Succesfully made a new project');
                                 res.redirect(`/api/v1/projects/${projectObject[0].id}`);
                             })
                         })
@@ -124,10 +148,10 @@ const addNewProjectController = async (req, res) => {
                     }, { folder: 'dbceramics' });
 
                 } else {
+                    req.flash('success', 'Succesfully made a new project');
                     res.redirect(`/api/v1/projects/${projectObject[0].id}`);
                 }
             });
-
     });
 };
 
@@ -164,17 +188,16 @@ const editProjectController = (req, res) => {
 
                             pool.query(`UPDATE projects2 SET imgurl = $1 WHERE id = $2`, [uploadObject.image_url, imageObject[0].project_id], (err, results) => {
                                 if (err) throw err;
+                                req.flash('success', 'Succesfully updated project');
                                 res.redirect(`/api/v1/projects/${projectid}`);
                             })
                         })
-
                     }, { folder: 'dbceramics' });
-
                 } else {
+                    req.flash('success', 'Succesfully updated project');
                     res.redirect(`/api/v1/projects/${projectid}`);
                 }
             });
-
     });
 };
 const updateProjectParametersController = (req, res) => {
@@ -205,8 +228,6 @@ const updateProjectParametersController = (req, res) => {
         let projectObject = results.rows;
         res.redirect(`/api/v1/projects/${projectObject[0].id}`);
     });
-
-
 };
 
 const updateProjectParametersKanbanController = async (req, res) => {
@@ -267,6 +288,7 @@ const checkTrimmed = async (req, res) => {
     }
     res.redirect(`/api/v1/projects/${projectid}`);
 };
+
 const checkBisque = async (req, res) => {
 
     const projectid = (req.params.projectid);
@@ -284,6 +306,7 @@ const checkBisque = async (req, res) => {
     }
     res.redirect(`/api/v1/projects/${projectid}`);
 };
+
 const checkGlazed = async (req, res) => {
 
     const projectid = (req.params.projectid);
@@ -301,6 +324,7 @@ const checkGlazed = async (req, res) => {
     }
     res.redirect(`/api/v1/projects/${projectid}`);
 };
+
 const checkGlazeFired = async (req, res) => {
 
     const projectid = (req.params.projectid);
@@ -318,44 +342,31 @@ const checkGlazeFired = async (req, res) => {
     }
     res.redirect(`/api/v1/projects/${projectid}`);
 };
-const updateNotes = async (req, res) => {
 
+const updateNotes = async (req, res) => {
     const projectid = (req.params.projectid);
     let { notes } = req.body;
-
 
     pool.query(`UPDATE projects2 SET notes = $2 WHERE id = $1`,
         [projectid, notes], (err) => {
             if (err) throw err;
         });
-
     res.redirect(`/api/v1/projects/${projectid}`);
 };
-
-
 
 const searchStringController = (req, res) => {
     const user_id = (req.user.id);
     const stringSearch = JSON.stringify(req.body.stringSearch).slice(1, -1);
 
-
     pool.query(`SELECT * FROM projects2 WHERE lower(projectname) LIKE lower('%${stringSearch}%') AND user_id=${user_id}`,
         (err, results) => {
             if (err) throw err;
-            // res.status(200).json(results.rows);
-
             console.log(results.rows)
 
             let projectObject = results.rows;
             res.render('projects/index', { projectObject, stringSearch });
-
         })
-
-
 };
-
-
-
 
 const deleteProjectController = async (req, res) => {
     const projectid = (req.params.projectid);
@@ -374,25 +385,23 @@ const deleteProjectController = async (req, res) => {
     //             .catch((error) => {
     //                 console.log('NOT cloudinary deleted this image')
     //             });
-
     //         // pool.query(queries.deleteImage, [imageObject[0].id], (err) => {
     //         //     if (err) throw err;
-
-
     //         // });
     //     }
     // });
-    pool.query(queries.deleteProject, [projectid], (err) => {
+    pool.query(queries.deleteProject, [projectid], (err, results) => {
         if (err) throw err;
+        const deletedObject = results.rows;
         console.log(`Deleted project with id:${projectid}`);
+        req.flash('error', `Succesfully deleted project: ${deletedObject[0].projectname}`);
         res.redirect(`/api/v1/projects`);
     });
-
 };
-
 
 module.exports = {
     getAllProjectsController,
+    getActivityController,
     getAllProjectsKanbanController,
     getProjectByIdController,
     getProjectByIdEditController,

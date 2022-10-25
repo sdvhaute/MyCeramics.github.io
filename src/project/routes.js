@@ -9,6 +9,7 @@ const router = Router();
 
 router.get('/', isLoggedIn, controller.getAllProjectsController); //index page
 router.get('/kanban', isLoggedIn, controller.getAllProjectsKanbanController); //kanban page
+router.get('/activity', isLoggedIn, controller.getActivityController); //activity page
 
 
 router.get('/new', isLoggedIn, controller.getNewProjectFormController); //new page -> loads form to create new project

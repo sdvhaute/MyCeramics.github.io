@@ -9,7 +9,7 @@ const getUserById = `SELECT * FROM users WHERE id= $1`;
 const updateAccount =
     "UPDATE users SET firstname= $2, lastname= $3 WHERE id = $1 RETURNING *";
 
-const deleteAccount = "DELETE FROM users WHERE id = $1";
+const deleteAccount = "DELETE FROM users WHERE id = $1 RETURNING *";
 
 
 module.exports = {

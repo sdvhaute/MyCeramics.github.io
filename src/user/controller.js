@@ -3,10 +3,6 @@ const queries = require('./queries');
 const bcrypt = require('bcrypt');
 const { render } = require('ejs');
 
-
-
-
-
 const getRegisterForm = (req, res) => {
     res.render('users/register.ejs');
 };
@@ -25,8 +21,8 @@ const getUserByEmail = (req, res) => {
         const user = results.rows;
         return results.rows;;
     })
-
 };
+
 const getUserById = (req, res) => {
     console.log('controller get UserById')
 
@@ -37,8 +33,8 @@ const getUserById = (req, res) => {
         const user = results.rows;
         return results.rows;
     })
-
 };
+
 const getAccount = (req, res) => {
 
     const user_id = (req.user.id);
@@ -48,10 +44,9 @@ const getAccount = (req, res) => {
 
         const userObject = results.rows;
         res.render('users/account.ejs', { userObject });
-
     })
-
 };
+
 const updateAccount = (req, res) => {
 
     const user_id = (req.user.id);
@@ -66,15 +61,10 @@ const updateAccount = (req, res) => {
 
         req.flash('success', 'Your account has succesfully been updated!');
         res.redirect(`/api/v1/account`);
-
     })
-
 };
 
-
 const postRegisterNewUser = async (req, res) => {
-
-
     try {
         const { firstname, lastname} = req.body;
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
@@ -103,14 +93,15 @@ const deleteAccount = (req, res) => { //also delete all projects and images in c
     console.log('start delete controller')
     req.logout(function (err) {
 
-        pool.query(queries.deleteAccount, [user_id], (err) => { // delete this user
+        pool.query(queries.deleteAccount, [user_id], (err, results) => { // delete this user
             if (err) throw err;
+            const deletedObject = results.rows;
             console.log(`Deleted user with id:${user_id}`);
+            req.flash('error', `Succesfully deleted account of ${deletedObject[0].firstname} ${deletedObject[0].lastname}`);
             res.redirect(`/`);
         });
     });
 };
-
 
 module.exports = {
     getRegisterForm,
