@@ -1,5 +1,5 @@
 # MyCeramics.github.io
-Website for tracking you ceramic projects
+Website for tracking your ceramic projects
 
 ## 1/ Create an account & log in 
 
@@ -25,7 +25,7 @@ Website for tracking you ceramic projects
 - use this board to quickly update the stage of projects while you are working on your pottery
 - gives a good overview of all projects in a certain stage. 
  
-Let's say you have decided that today you are going to be trimming ceramics, on this board you can easily see all your unfinished projects that still need trimming. 
+> Let's say you have decided that today you are going to be trimming ceramics, on this board you can easily see all your unfinished projects that still need trimming and update once a pot is trimmed 
 
 ## 6/ My Account
 
