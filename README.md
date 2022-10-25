@@ -11,7 +11,7 @@ Website for tracking your ceramic projects
 - Add other parameters such as: form, type of clay, type of glaze, starting weight of your clay, dimensions and additional notes
 
 
-![This is an image](/images/createNewProjectPart1.png)
+![This is an image](/images/createNewProjectPart1.png  {width=40px height=400px})
 
 ![This is an image](/images/createNewProjectPart2.png)
 
