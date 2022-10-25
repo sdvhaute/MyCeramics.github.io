@@ -24,16 +24,11 @@ cloudinary.config({
   api_secret: process.env.API_SECRET
 });
 
+const initialize = require('./public/scripts/passport-config');
 
-const initializePassport = require('./public/scripts/passport-config');
-
-initializePassport(passport);
-
-
-
+initialize(passport);
 
 const userRoutes = require('./src/user/routes');
-// const creatorRoutes = require('./src/creator/routes');
 const projectRoutes = require('./src/project/routes');
 
 // App configuration

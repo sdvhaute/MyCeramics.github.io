@@ -1,6 +1,7 @@
+"use strict";
+
 // Alert user of unsaved changes with browser alert message (only for forms that need validation)
 
-"use strict";
 (() => {
     const modified = new Set;
     const defaultValue = "defaultValue";
@@ -45,5 +46,8 @@
         }
     });
 })();
+
+
+
 
 

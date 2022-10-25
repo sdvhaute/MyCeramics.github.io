@@ -1,5 +1,6 @@
 "use strict";
 const LocalStrategy = require("passport-local").Strategy;
+
 const { pool } = require("../../db");
 const bcrypt = require("bcrypt");
 

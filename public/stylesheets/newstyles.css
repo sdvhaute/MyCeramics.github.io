@@ -120,8 +120,6 @@ nav .collapsing {
     width: 100%;
     background-color: var(--colordark) !important;
     color: var(--colorlight) !important;
-
-
 }
 
 .nav-link,
@@ -395,6 +393,7 @@ a:hover {
     border-radius: 0%;
     transition: transform 0.5s ease-in;
 }
+
 .card:hover {
     transform: scale(105%);
 }
@@ -438,10 +437,8 @@ a:hover {
 
 /* kanban page */
 
-.kanban {
+.kanban-board {
     background-color: var(--color3);
-    margin: 0.5rem;
-    padding: 0.5rem;
 }
 
 #divs-kanban {

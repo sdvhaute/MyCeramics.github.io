@@ -1,15 +1,9 @@
 const { pool } = require('../../db');
 const queries = require('./queries');
 
-
-// Cloudinary upset
-const http = require('http');
-const util = require('util');
-
 const cloudinary = require("cloudinary");
 require("dotenv").config();
 
-// const Formidable = require('formidable');
 const Formidable = require('formidable-serverless');
 
 

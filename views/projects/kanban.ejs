@@ -6,7 +6,8 @@
 
             <div class="row">
 
-                <div class="col-12 col-lg kanban kanban-new d-flex flex-lg-column justify-content-start align-items-center">
+                <div
+                    class="col-12 col-lg kanban kanban-new d-flex flex-lg-column justify-content-start align-items-center">
                     <div class="row row-title">
                         <h3>New projects</h3>
                     </div>
@@ -14,21 +15,18 @@
                         <% for (let project of projectObject){ if (project.thrown===false && project.trimmed===false &&
                             project.bisque===false && project.glazed===false && project.glazefired===false) {%>
 
-                            <div draggable="true" id="divs-kanban" class="index-item card m-1"
-                                style="width: 200px;  height: 200px;" data-id="<%=project.id%>"
-                                data-thrown="<%=project.thrown%>" data-trimmed="<%=project.trimmed%>"
-                                data-bisque="<%=project.bisque%>" data-glazed="<%=project.glazed%>"
-                                data-glazefired="<%=project.glazefired%>"
+                            <div draggable="true" id="divs-kanban" class="card p-0 m-1" style="width: fit-content;"
+                                data-id="<%=project.id%>" data-thrown="<%=project.thrown%>"
+                                data-trimmed="<%=project.trimmed%>" data-bisque="<%=project.bisque%>"
+                                data-glazed="<%=project.glazed%>" data-glazefired="<%=project.glazefired%>"
                                 onclick="window.location.href='/api/v1/projects/<%= project.id %>';">
 
-                                <div class="card-img-top fill" style="width: 100%;  height: 80%;">
-                                    <img draggable="false" class="card-img" src="<%= project.imgurl %>">
+                                <div class="card-top" style="background-image: url(<%=project.imgurl%>);">
                                 </div>
-                                <div class="card-body" style="width: 100%;  height: 20%;">
+                                <div class="card-body d-flex align-items-center">
                                     <h5 class="card-title">
                                         <%= project.projectname %>
                                     </h5>
-
                                 </div>
                             </div>
 
@@ -48,21 +46,18 @@
 
 
 
-                            <div draggable="true" id="divs-kanban" class="index-item card m-1"
-                                style="width: 200px;  height: 200px;" data-id="<%=project.id%>"
+                            <div draggable="true" id="divs-kanban" class="card p-0 m-1" style="width: fit-content;" data-id="<%=project.id%>"
                                 data-thrown="<%=project.thrown%>" data-trimmed="<%=project.trimmed%>"
                                 data-bisque="<%=project.bisque%>" data-glazed="<%=project.glazed%>"
                                 data-glazefired="<%=project.glazefired%>"
                                 onclick="window.location.href='/api/v1/projects/<%= project.id %>';">
 
-                                <div class="card-img-top fill" style="width: 100%;  height: 80%;">
-                                    <img draggable="false" class="card-img" src="<%= project.imgurl %>">
+                                <div class="card-top" style="background-image: url(<%=project.imgurl%>);">
                                 </div>
-                                <div class="card-body" style="width: 100%;  height: 20%;">
+                                <div class="card-body d-flex align-items-center">
                                     <h5 class="card-title">
                                         <%= project.projectname %>
                                     </h5>
-
                                 </div>
                             </div>
                             <% } } %>
@@ -77,21 +72,18 @@
                         <% for (let project of projectObject){if ( project.trimmed===true && project.bisque===false &&
                             project.glazed===false && project.glazefired===false) {%>
 
-                            <div draggable="true" id="divs-kanban" class="index-item card m-1"
-                                style="width: 200px;  height: 200px;" data-id="<%=project.id%>"
+                            <div draggable="true" id="divs-kanban" class="card p-0 m-1" style="width: fit-content;" data-id="<%=project.id%>"
                                 data-thrown="<%=project.thrown%>" data-trimmed="<%=project.trimmed%>"
                                 data-bisque="<%=project.bisque%>" data-glazed="<%=project.glazed%>"
                                 data-glazefired="<%=project.glazefired%>"
                                 onclick="window.location.href='/api/v1/projects/<%= project.id %>';">
 
-                                <div class="card-img-top fill" style="width: 100%;  height: 80%;">
-                                    <img draggable="false" class="card-img" src="<%= project.imgurl %>">
+                                <div class="card-top" style="background-image: url(<%=project.imgurl%>);">
                                 </div>
-                                <div class="card-body" style="width: 100%;  height: 20%;">
+                                <div class="card-body d-flex align-items-center">
                                     <h5 class="card-title">
                                         <%= project.projectname %>
                                     </h5>
-
                                 </div>
                             </div>
                             <% } } %>
@@ -106,21 +98,18 @@
                         <% for (let project of projectObject){ if (project.bisque===true && project.glazed===false &&
                             project.glazefired===false) {%>
 
-                            <div draggable="true" id="divs-kanban" class="index-item card m-1"
-                                style="width: 200px;  height: 200px;" data-id="<%=project.id%>"
+                            <div draggable="true" id="divs-kanban" class="card p-0 m-1" style="width: fit-content;" data-id="<%=project.id%>"
                                 data-thrown="<%=project.thrown%>" data-trimmed="<%=project.trimmed%>"
                                 data-bisque="<%=project.bisque%>" data-glazed="<%=project.glazed%>"
                                 data-glazefired="<%=project.glazefired%>"
                                 onclick="window.location.href='/api/v1/projects/<%= project.id %>';">
 
-                                <div class="card-img-top fill" style="width: 100%;  height: 80%;">
-                                    <img draggable="false" class="card-img" src="<%= project.imgurl %>">
+                                <div class="card-top" style="background-image: url(<%=project.imgurl%>);">
                                 </div>
-                                <div class="card-body" style="width: 100%;  height: 20%;">
+                                <div class="card-body d-flex align-items-center">
                                     <h5 class="card-title">
                                         <%= project.projectname %>
                                     </h5>
-
                                 </div>
                             </div>
                             <% } } %>
@@ -135,17 +124,15 @@
                         <% for (let project of projectObject){if (project.glazed===true && project.glazefired===false)
                             {%>
 
-                            <div draggable="true" id="divs-kanban" class="index-item card m-1"
-                                style="width: 200px;  height: 200px;" data-id="<%=project.id%>"
+                            <div draggable="true" id="divs-kanban" class="card p-0 m-1" style="width: fit-content;" data-id="<%=project.id%>"
                                 data-thrown="<%=project.thrown%>" data-trimmed="<%=project.trimmed%>"
                                 data-bisque="<%=project.bisque%>" data-glazed="<%=project.glazed%>"
                                 data-glazefired="<%=project.glazefired%>"
                                 onclick="window.location.href='/api/v1/projects/<%= project.id %>';">
 
-                                <div class="card-img-top fill" style="width: 100%;  height: 80%;">
-                                    <img draggable="false" class="card-img" src="<%= project.imgurl %>">
+                                <div class="card-top" style="background-image: url(<%=project.imgurl%>);">
                                 </div>
-                                <div class="card-body" style="width: 100%;  height: 20%;">
+                                <div class="card-body d-flex align-items-center">
                                     <h5 class="card-title">
                                         <%= project.projectname %>
                                     </h5>
@@ -162,17 +149,15 @@
                     <div class="row row-content d-flex justify-content-center ">
                         <% for (let project of projectObject){ if (project.glazefired===true) {%>
 
-                            <div draggable="true" id="divs-kanban" class="index-item card m-1"
-                                style="width: 200px;  height: 200px;" data-id="<%=project.id%>"
+                            <div draggable="true" id="divs-kanban" class="card p-0 m-1" style="width: fit-content;" data-id="<%=project.id%>"
                                 data-thrown="<%=project.thrown%>" data-trimmed="<%=project.trimmed%>"
                                 data-bisque="<%=project.bisque%>" data-glazed="<%=project.glazed%>"
                                 data-glazefired="<%=project.glazefired%>"
                                 onclick="window.location.href='/api/v1/projects/<%= project.id %>';">
 
-                                <div class="card-img-top fill" style="width: 100%;  height: 80%;">
-                                    <img draggable="false" class="card-img" src="<%= project.imgurl %>">
+                                <div class="card-top" style="background-image: url(<%=project.imgurl%>);">
                                 </div>
-                                <div class="card-body" style="width: 100%;  height: 20%;">
+                                <div class="card-body d-flex align-items-center">
                                     <h5 class="card-title">
                                         <%= project.projectname %>
                                     </h5>
@@ -230,5 +215,82 @@
         <input type="hidden" id="glazefired" name="glazefired" value="true" />
     </form>
 
-    
-    <script src='/scripts/kanbanscript.js'></script>
+
+    <script>
+        "use strict";
+        // Kanban Drag & Drop
+
+        const items = document.querySelectorAll('#divs-kanban');
+
+        const kanbans = document.querySelectorAll('.kanban');
+
+        const formNew = document.querySelector('.form-new');
+        const formThrown = document.querySelector('.form-thrown');
+        const formTrimmed = document.querySelector('.form-trimmed');
+        const formBisque = document.querySelector('.form-bisque');
+        const formGlazed = document.querySelector('.form-glazed');
+        const formGlazeFired = document.querySelector('.form-glazefired');
+
+        const kanbanNew = document.querySelector('.kanban-new');
+        const kanbanThrown = document.querySelector('.kanban-thrown');
+        const kanbanTrimmed = document.querySelector('.kanban-trimmed');
+        const kanbanBisque = document.querySelector('.kanban-bisque');
+        const kanbanGlazed = document.querySelector('.kanban-glazed');
+        const kanbanGlazeFired = document.querySelector('.kanban-glazefired');
+
+        // formThrown.action = `/api/v1/projects/${item}/updateKanban`;
+        // formThrown.submit();
+
+
+        items.forEach(function (item) {
+
+            item.addEventListener('dragstart', (e) => {
+                item.classList.add('dragging');
+                console.log('dragstart');
+            });
+
+            item.addEventListener('dragend', (e) => {
+                item.classList.remove('dragging');
+                console.log('dragend');
+            });
+        });
+
+        kanbans.forEach(function (kanban) {
+            kanban.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const draggable = document.querySelector('.dragging');
+
+                kanban.appendChild(draggable);
+
+                if (kanban.classList.contains('kanban-new')) {
+                    formNew.action = `/api/v1/projects/${draggable.dataset.id}/updateKanban?_method=PUT`;
+                    formNew.submit();
+                    return;
+                } else if (kanban.classList.contains('kanban-thrown')) {
+                    formThrown.action = `/api/v1/projects/${draggable.dataset.id}/updateKanban?_method=PUT`;
+                    formThrown.submit();
+                    return;
+                } else if (kanban.classList.contains('kanban-trimmed')) {
+                    formTrimmed.action = `/api/v1/projects/${draggable.dataset.id}/updateKanban?_method=PUT`;
+                    formTrimmed.submit();
+                    return;
+                } else if (kanban.classList.contains('kanban-bisque')) {
+                    formBisque.action = `/api/v1/projects/${draggable.dataset.id}/updateKanban?_method=PUT`;
+                    formBisque.submit();
+                    return;
+                } else if (kanban.classList.contains('kanban-glazed')) {
+                    formGlazed.action = `/api/v1/projects/${draggable.dataset.id}/updateKanban?_method=PUT`;
+                    formGlazed.submit();
+                    return;
+                } else if (kanban.classList.contains('kanban-glazefired')) {
+                    formGlazeFired.action = `/api/v1/projects/${draggable.dataset.id}/updateKanban?_method=PUT`;
+                    formGlazeFired.submit();
+                    return;
+                }
+
+            });
+        });
+
+
+    </script>

@@ -32,7 +32,7 @@
             <% } else { %>
                 <form action="/api/v1/projects/search" method="POST" class="d-flex search-form">
                     <input class="form-control me-2" type="text" name="stringSearch" aria-label="Search"
-                        placeholder="Search" >
+                        placeholder="Search">
                     <button class="btn" type="submit">Search</button>
                 </form>
                 <%}%>
@@ -44,7 +44,8 @@
         <div id="section-new" class="section-cards container d-flex flex-column py-3">
 
             <div class="row section-label p-2 rounded-top">New Projects</div>
-            <div class="row section-content p-3 d-flex justify-content-md-start justify-content-center box-shadow box-shadow">
+            <div
+                class="row section-content p-3 d-flex justify-content-md-start justify-content-center box-shadow box-shadow">
 
                 <% for (let project of projectObject){ if (project.thrown===false && project.trimmed===false &&
                     project.bisque===false && project.glazed===false && project.glazefired===false) {%>
@@ -191,6 +192,72 @@
         </div>
     </div>
 
-    
-    <script src='/scripts/indexscript.js'></script>
-    
+
+    <script>
+
+        // Count nr of items-index page
+        const sections = document.querySelectorAll('.section-cards');
+
+        sections.forEach((section) => {
+
+            const countCards = section.querySelectorAll('.card').length;
+
+            const sectionLabel = section.querySelector('.section-label');
+
+            sectionLabel.innerHTML = sectionLabel.innerHTML + ' ( ' + countCards + ' )';
+
+            if (countCards === 0) {
+                section.classList.add('nod')
+            }
+        })
+
+
+        // FILTER INDEX PAGE //
+
+        const sectionNew = document.querySelector('#section-new');
+        const sectionThrown = document.querySelector('#section-thrown');
+        const sectionTrimmed = document.querySelector('#section-trimmed');
+        const sectionBisque = document.querySelector('#section-bisque');
+        const sectionGlazed = document.querySelector('#section-glazed');
+        const sectionGlazefired = document.querySelector('#section-glazefired');
+
+        const sectionCards = document.querySelectorAll('.section-cards');
+        const checkFilter = document.querySelector('#filterparams');
+
+
+        checkFilter.addEventListener('change', (event) => {
+
+            const selectedOption = event.target.value;
+            console.log(selectedOption)
+
+            sectionCards.forEach(sectionCard => {
+                sectionCard.classList.add('nod');
+            });
+
+            switch (selectedOption) {
+                case 'new':
+                    sectionNew.classList.remove('nod');
+                    break;
+                case 'thrown':
+                    sectionThrown.classList.remove('nod');
+                    break;
+                case 'trimmed':
+                    sectionTrimmed.classList.remove('nod');
+                    break;
+                case 'bisque':
+                    sectionBisque.classList.remove('nod');
+                    break;
+                case 'glazed':
+                    sectionGlazed.classList.remove('nod');
+                    break;
+                case 'glazefired':
+                    sectionGlazefired.classList.remove('nod');
+                    break;
+                case '':
+                    sectionCards.forEach(sectionCard => {
+                        sectionCard.classList.remove('nod');
+                    });
+                    break;
+            };
+        });
+    </script>
