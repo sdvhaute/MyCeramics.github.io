@@ -1,61 +1,62 @@
 <% layout('boilerplate') -%>
 
-
-    <div class="container">
-        <div class="row">
-            <div class="col-6">
-                <div id='pie'>
-                    <!-- Plotly chart will be drawn inside this DIV -->
-                </div>
-            </div>
-            <div class="col-6">
-                <div id='bar'>
-                    <!-- Plotly chart will be drawn inside this DIV -->
-                </div>
-            </div>
-        </div>
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <div id="pie">
+        <!-- Plotly chart will be drawn inside this DIV -->
+      </div>
     </div>
+    <div class="col-6">
+      <div id="bar">
+        <!-- Plotly chart will be drawn inside this DIV -->
+      </div>
+    </div>
+  </div>
+</div>
 
+<script>
+  var data = [
+    {
+      type: "pie",
+      values: [
+        "<%= countNew%>",
+        "<%= countThrown%>",
+        "<%= countTrimmed%>",
+        "<%= countBisque%>",
+        "<%= countGlazed%>",
+        "<%= countFinished%>",
+      ],
+      labels: ["New", "Thrown", "Trimmed", "Biscuit", "Glazed", "Finished"],
+      textinfo: "label+percent",
+      insidetextorientation: "radial",
+    },
+  ];
 
+  var layout = [
+    {
+      height: 700,
+      width: 700,
+    },
+  ];
 
+  Plotly.newPlot("pie", data, layout);
 
-    <script>
+  var data = [
+    {
+      type: "bar",
+      x: [
+        "<%= countNew%>",
+        "<%= countThrown%>",
+        "<%= countTrimmed%>",
+        "<%= countBisque%>",
+        "<%= countGlazed%>",
+        "<%= countFinished%>",
+      ],
+      y: ["New", "Thrown", "Trimmed", "Biscuit", "Glazed", "Finished"],
+      orientation: "h",
+    },
+  ];
 
-
-        var data = [{
-            type: "pie",
-            values: [
-                "<%= countNew%>",
-                "<%= countThrown%>",
-                "<%= countTrimmed%>",
-                "<%= countBisque%>",
-                "<%= countGlazed%>",
-                "<%= countFinished%>"],
-            labels: ["New", "Thrown", "Trimmed", "Biscuit", "Glazed", "Finished"],
-            textinfo: "label+percent",
-            insidetextorientation: "radial"
-        }]
-
-        var layout = [{
-            height: 700,
-            width: 700
-        }]
-
-        Plotly.newPlot('pie', data, layout)
-
-
-        var data = [{
-            type: 'bar',
-            x: [
-                "<%= countNew%>",
-                "<%= countThrown%>",
-                "<%= countTrimmed%>",
-                "<%= countBisque%>",
-                "<%= countGlazed%>",
-                "<%= countFinished%>"],
-            y: ["New", "Thrown", "Trimmed", "Biscuit", "Glazed", "Finished"],
-            orientation: 'h'
-        }];
-
-        Plotly.newPlot('bar', data);
-    </script>
+  Plotly.newPlot("bar", data);
+</script>
