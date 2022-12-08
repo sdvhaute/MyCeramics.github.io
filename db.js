@@ -21,7 +21,7 @@ module.exports = { pool };
 //     user:"postgres",
 //     host:"localhost",
 //     database:"dbceramics",
-//     password:"Biasca789!",
+//     password:"",
 //     port:5432
 // });
 
